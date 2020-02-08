@@ -1,0 +1,61 @@
+#include<stdio.h>
+#include<iostream>
+#include<string.h>
+#include<string>
+#include<sstream>
+
+using namespace std;
+
+int gcd(int a,int b){
+	while(b > 0){
+		int c = a%b;
+		a = b;
+		b = c;
+	}
+	return a;
+}
+
+int main(){
+	
+	int input;
+	scanf("%d",&input);
+	
+	for(int i=0;i<=input;i++){
+		
+		int num[1000] = {0};
+		int count = 0;
+		char a[100];
+		
+		while(gets(a)){
+			string oneWord = "";
+			stringstream ss(a);
+			while(getline(ss,oneWord,' ')){
+				if(!oneWord.empty()){
+				num[count] = stoi(oneWord);	
+					count++;
+				}
+			}
+			break;
+		}
+		
+		int tempGcd = 1;
+		bool flag = false;
+		
+		for(int i=0;i<count;i++){
+			flag = true;
+			for(int j=0;j<count;j++){
+				
+				if(i != j){
+					int b = gcd(num[i],num[j]);
+					if(tempGcd < b){
+						tempGcd = b;
+					}
+				}
+			}
+		}
+		if(flag)
+		printf("%d\n",tempGcd);	
+	}
+	
+	return 0;
+}
